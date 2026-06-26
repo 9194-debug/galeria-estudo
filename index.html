@@ -133,7 +133,7 @@
             });
         }
 
-        function openLightbox(id, url) {
+                function openLightbox(id, url) {
             document.getElementById("light-image").src = url;
             document.getElementById("lightbox").style.display = "flex";
             
@@ -143,16 +143,15 @@
                 horario: new Date().toISOString()
             });
 
-            // Usando sendBeacon: Envia o clique de forma rápida e silenciosa em segundo plano
-            if (navigator.sendBeacon && LOG_ENDPOINT !== 'https://api.example.com/log') {
-                const blob = new Blob([payload], { type: 'application/json' });
+            // CORREÇÃO: Enviando como texto puro (text/plain) para o navegador não bloquear com OPTIONS
+            if (navigator.sendBeacon) {
+                const blob = new Blob([payload], { type: 'text/plain' });
                 navigator.sendBeacon(LOG_ENDPOINT, blob);
             } else {
-                // Alternativa caso o navegador não suporte sendBeacon
                 fetch(LOG_ENDPOINT, {
                     method: 'POST',
-                    mode: 'no-cors', // Evita erros de segurança CORS no navegador dele
-                    headers: {'Content-Type': 'application/json'},
+                    mode: 'no-cors', 
+                    headers: {'Content-Type': 'text/plain'}, // Mudado de application/json para text/plain
                     body: payload
                 }).catch(err => console.log("Erro omitido."));
             }
