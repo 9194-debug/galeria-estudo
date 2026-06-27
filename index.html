@@ -79,8 +79,8 @@
     <!-- Tela de Aviso Inicial -->
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal">
-            <h2>Você está sozinho agora? ⚠️👀</h2>
-            <h2>A pagina a seguir contem cunteudo +18 continuar?</h2>
+            <h2>Você está sozinho agora? ⚠️👀</h2>,
+            <h2>A pagina a seguir contem conteudo +18 continuar?</h2>
             <button class="btn-no" onclick="handleChoice('no')">Não</button>
             <button class="btn-yes" onclick="handleChoice('yes')">Sim</button>
         </div>
@@ -101,16 +101,36 @@
         // Substitua as URLs abaixo pelos links diretos dos seus GIFs/Imagens
         const images = [
             {id: "gif_pesca_01", url: "https://i.pinimg.com/736x/46/e7/46/46e74682c5d5b036ec932c0bb19ccd04.jpg", type: "fish"},
-            {id: "gif_port_01", url: "https://i.postimg.cc/brV8xcbc/Homen-9.jpg", type: "portfolio"},
             {id: "gif_pesca_02", url: "https://i.pinimg.com/1200x/7e/56/c8/7e56c82bee97ab59428b9ef1a5d014ee.jpg", type: "fish"},
-            {id: "gif_port_02", url: "https://i.postimg.cc/90gVd59N/Homen-4.jpg", type: "portfolio"},
-            {id: "gif_port_03", url: "https://i.postimg.cc/kGY9Q38r/Homen-10.jpg", type: "portfolio"},
-            {id: "gif_port_04", url: "https://i.postimg.cc/6qbwrJRX/Homen-15.jpg", type: "portfolio"},
-            {id: "gif_port_05", url: "https://i.postimg.cc/SR1q6F8p/Homen-12.jpg", type: "portfolio"},
-            {id: "gif_port_06", url: "https://i.postimg.cc/x8pYvDHY/Homen-13.jpg", type: "portfolio"},
-            {id: "gif_port_07", url: "https://i.postimg.cc/2y9mQRWG/Homen-3.jpg", type: "portfolio"},
-            {id: "gif_port_08", url: "https://i.postimg.cc/0jXxYRS4/Homen-7.jpg", type: "portfolio"},
-            {id: "gif_port_09", url: "https://i.postimg.cc/nrSZ4bm6/Homen-8.jpg", type: "portfolio"}
+            {id: "gif_pesca_03", url: "", type: "fish"},
+            {id: "gif_pesca_04", url: "", type: "fish"},
+            {id: "gif_pesca_05", url: "", type: "fish"},
+            {id: "gif_pesca_06", url: "", type: "fish"},
+            {id: "gif_pesca_07", url: "", type: "fish"},
+            {id: "gif_pesca_08", url: "", type: "fish"},
+            {id: "gif_pesca_09", url: "", type: "fish"},
+            {id: "gif_pesca_10", url: "", type: "fish"},
+            {id: "gif_pesca_11", url: "", type: "fish"},
+            {id: "gif_pesca_12", url: "", type: "fish"},
+            {id: "gif_pesca_13", url: "", type: "fish"},
+            {id: "gif_pesca_14", url: "", type: "fish"},
+            {id: "gif_pesca_15", url: "", type: "fish"},
+            
+            {id: "homem_01", url: "https://i.postimg.cc/GtgrFwDj/Homen-1.jpg", type: "portfolio"},
+            {id: "homem_02", url: "https://i.postimg.cc/0jXxYRSZ/Homen-2.jpg", type: "portfolio"},
+            {id: "homem_03", url: "https://i.postimg.cc/2y9mQRWG/Homen-3.jpg", type: "portfolio"},
+            {id: "homem_04", url: "https://i.postimg.cc/90gVd59N/Homen-4.jpg", type: "portfolio"},
+            {id: "homem_05", url: "https://i.postimg.cc/SR1q6F91/Homen-5.jpg", type: "portfolio"},
+            {id: "homem_06", url: "https://i.postimg.cc/prcxfbj6/Homen-6.jpg", type: "portfolio"},
+            {id: "homem_07", url: "https://i.postimg.cc/0jXxYRS4/Homen-7.jpg", type: "portfolio"},
+            {id: "homem_08", url: "https://i.postimg.cc/nrSZ4bm6/Homen-8.jpg", type: "portfolio"},
+            {id: "homem_09", url: "https://i.postimg.cc/brV8xcbc/Homen-9.jpg", type: "portfolio"},
+            {id: "homem_10", url: "https://i.postimg.cc/kGY9Q38r/Homen-10.jpg", type: "portfolio"},
+            {id: "homem_11", url: "https://i.postimg.cc/Bb7sT9Fr/Homen-11.png", type: "portfolio"},
+            {id: "homem_12", url: "https://i.postimg.cc/SR1q6F8p/Homen-12.jpg", type: "portfolio"},
+            {id: "homem_13", url: "https://i.postimg.cc/x8pYvDHY/Homen-13.jpg", type: "portfolio"},
+            {id: "homem_14", url: "https://i.postimg.cc/7htD3874/Homen-14.jpg", type: "portfolio"},
+            {id: "homem_15", url: "https://i.postimg.cc/6qbwrJRX/Homen-15.jpg", type: "portfolio"}
         ];
 
         // IMPORTANTE: Insira uma URL real de recebimento aqui (Ex: Formspree, Webhook.site, etc.)
@@ -129,7 +149,7 @@
             images.forEach(img => {
                 // Filtra o que vai exibir baseado no botão clicado
                 if ((choice === "no" && img.type === "fish") || 
-                    (choice === "yes" && (img.type === "fish" || img.type === "portfolio"))) {
+                    (choice === "yes" && img.type === "portfolio")) {
                     
                     const thumb = document.createElement("img");
                     thumb.src = img.url;
