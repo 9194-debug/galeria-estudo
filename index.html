@@ -31,26 +31,44 @@
             width: 350px;
         }
         .modal h2 { margin-top: 0; font-size: 1.3rem; }
+        .piscando-vermelho {
+            animation: piscarCor 0.6s infinite alternate;
+        }
+        @keyframes piscarCor {
+            0% { color: #000000; }
+            100% { color: #ff0000 }
+        }
         .modal button {
             padding: 10px 25px;
             margin: 10px;
             font-size: 1rem;
             cursor: pointer;
-            border: none;
+            border: 2px solid #000000;
             border-radius: 4px;
+            font-weight: bold;
+            animation: piscarBotao 1.0s infinite;
         }
-        .btn-yes { background-color: #e74c3c; color: white; }
-        .btn-no { background-color: #7f8c8d; color: white; }
+        @keyframes piscarBotao {
+            0%, 100% {
+                background-color: #000000;
+                color: #ffffff;
+            }
+            50% { background-color: #ffffff;
+            color: #000000;
+             }
+        }
+        /*.btn-yes { background-color: #2ecc71; color: white; }
+        .btn-no { background-color: #e74c3c; color: white; }*/
         
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-top: 20px;
         }
         .thumbnail {
-            width: 100%;
-            height: 120px;
+            width: 50%;
+            height: 50%;
             object-fit: cover;
             border-radius: 6px;
             cursor: pointer;
@@ -79,10 +97,12 @@
     <!-- Tela de Aviso Inicial -->
     <div id="modal-overlay" class="modal-overlay">
         <div class="modal">
-            <h2>Você está sozinho agora? ⚠️👀</h2>,
-            <h2>A pagina a seguir contem conteudo +18 continuar?</h2>
-            <button class="btn-no" onclick="handleChoice('no')">Não</button>
-            <button class="btn-yes" onclick="handleChoice('yes')">Sim</button>
+            <h2 class="piscando-vermelho">VOCÊ ESTÁ SOZINHO?</h2>
+            <h2>leia antes de escolher</h2>
+            <h2>É melhor você olhar isso sozinho. Vai aparecer homem e mulher sem roupa.</h2>
+            <h2>Se escolher HOMEM, aparecem homens pelados. Se escolher MULHER, aparecem mulheres peladas. Aperte na foto para ela ficar maior.</h2>
+            <button class="btn-no" onclick="handleChoice('no')">mulher</button>
+            <button class="btn-yes" onclick="handleChoice('yes')">homen</button>
         </div>
     </div>
 
@@ -100,46 +120,99 @@
     <script>
         // Substitua as URLs abaixo pelos links diretos dos seus GIFs/Imagens
         const images = [
-            {id: "gif_pesca_01", url: "https://i.pinimg.com/736x/46/e7/46/46e74682c5d5b036ec932c0bb19ccd04.jpg", type: "fish"},
-            {id: "gif_pesca_02", url: "https://i.pinimg.com/1200x/7e/56/c8/7e56c82bee97ab59428b9ef1a5d014ee.jpg", type: "fish"},
-            {id: "gif_pesca_03", url: "https://i.pinimg.com/736x/46/e7/46/46e74682c5d5b036ec932c0bb19ccd04.jpg", type: "fish"},
-            {id: "gif_pesca_04", url: "https://i.pinimg.com/736x/99/f9/77/99f9773450cd7b91072015afa6ad420c.jpg", type: "fish"},
-            {id: "gif_pesca_05", url: "https://i.pinimg.com/736x/11/df/8d/11df8d60d6a2ba70f3fdb1735a8d60c7.jpg", type: "fish"},
-            {id: "gif_pesca_06", url: "https://i.pinimg.com/736x/cf/72/c8/cf72c8ac5ae55f3a06263bb7fea5d99b.jpg", type: "fish"},
-            {id: "gif_pesca_07", url: "https://i.pinimg.com/736x/74/14/8c/74148c3f18cdf3949f7bf252c913cb8e.jpg", type: "fish"},
-            {id: "gif_pesca_08", url: "https://i.pinimg.com/736x/f1/a2/2b/f1a22bd3f63eaa88a920e4dfa702925d.jpg", type: "fish"},
-            {id: "gif_pesca_09", url: "https://i.pinimg.com/736x/d8/40/96/d840962f1fa8591bb1ed8ed8652f3511.jpg", type: "fish"},
-            {id: "gif_pesca_10", url: "https://i.pinimg.com/736x/b9/67/76/b96776c78eb724c80c51d5a3d3ddd809.jpg", type: "fish"},
-            {id: "gif_pesca_11", url: "https://i.pinimg.com/736x/ee/50/39/ee50394bf64a156d579ce4d1f0f3f64e.jpg", type: "fish"},
-            {id: "gif_pesca_12", url: "https://i.pinimg.com/736x/40/44/d1/4044d1e9803e2318c365b5f71d20fe32.jpg", type: "fish"},
-            {id: "gif_pesca_13", url: "https://i.pinimg.com/736x/b3/ff/7a/b3ff7ae06c48daa8266a6a1aa4511a9a.jpg", type: "fish"},
-            {id: "masculino_14", url: "https://i.pinimg.com/vwebp/736x/5a/82/76/5a8276b2d566309513c868ce68efdaf5.webp", type: "fish"},
-            {id: "gif_pesca_15", url: "https://i.pinimg.com/736x/a9/aa/63/a9aa635325946fa2d69ae278d66e2274.jpg", type: "fish"},
+            {id: "mulher_01", url: "https://78.media.tumblr.com/342b44defe990f2a71b50296f58b1d16/tumblr_okakc3r7dE1rhxar9o1_1280.jpg", type: "fish"},
+            {id: "mulher_02", url: "https://78.media.tumblr.com/b3f49c0ebbaf133b552f0dfeca5d725a/tumblr_ojhzcmmecy1qga2epo1_1280.jpg", type: "fish"},
+            {id: "mulher_03", url: "https://78.media.tumblr.com/72278408a9da40280f77634d92e37d9a/tumblr_p0pa88q2bU1wk3k7zo1_1280.jpg", type: "fish"},
+            {id: "mulher_04", url: "https://78.media.tumblr.com/57100fd171e7e1a9e43e0ff35febfb10/tumblr_p1vtf2IUQD1wet334o1_1280.jpg", type: "fish"},
+            {id: "mulher_05", url: "https://78.media.tumblr.com/7de3bd7e06ce23a3cc71291236c11e1f/tumblr_p04mzzsNlJ1wet334o1_1280.jpg", type: "fish"},
+            {id: "mulher_06", url: "https://78.media.tumblr.com/f4a037f340d57a164d011facffd27389/tumblr_ortygnXObh1wszzr3o1_1280.jpg", type: "fish"},
+            {id: "mulher_07", url: "https://78.media.tumblr.com/a19a8522727bec83589667577e30215a/tumblr_o224slhfvU1ui0q55o1_1280.gif", type: "fish"},
+            {id: "mulher_08", url: "https://78.media.tumblr.com/cc42fcf8e6efb7a6ce799416c4dba562/tumblr_p490gjNc0H1x5h3eto1_1280.jpg", type: "fish"},
+            {id: "mulher_09", url: "https://78.media.tumblr.com/tumblr_mbown1VAhx1qm7d6go1_1280.gif", type: "fish"},
+            {id: "mulher_10", url: "https://78.media.tumblr.com/2f91acb08bd17484635f4d89b6f78a83/tumblr_mlkqhcCEh71s14pmdo1_1280.jpg", type: "fish"},
+            {id: "mulher_11", url: "https://78.media.tumblr.com/0f90c7b3afa823516d386c6268c0ef96/tumblr_o1lxp94YzR1uiq52mo1_1280.jpg", type: "fish"},
+            {id: "mulher_12", url: "https://78.media.tumblr.com/c747a34645b627507cc209bf9db777e8/tumblr_ozdmv9RB1b1wdpubio1_1280.jpg", type: "fish"},
+            {id: "mulher_13", url: "https://78.media.tumblr.com/ddcadfc1d727d65450e5224af9054cec/tumblr_oihui3Cwor1vb0t14o1_1280.gif", type: "fish"},
+            {id: "mulher_14", url: "https://78.media.tumblr.com/9b0688fcc8c1a67fa9101b81ca500def/tumblr_n2xa71WRJo1ts66feo1_1280.jpg", type: "fish"},
+            {id: "mulher_15", url: "https://78.media.tumblr.com/20d11158b28202e03765f25cde96fee7/tumblr_ob0frl1uqd1vqmufro1_1280.gif", type: "fish"},
+            {id: "mulher_16", url: "https://78.media.tumblr.com/d42065160f9bd1030c0e0c22d702bf6c/tumblr_n49o6uSYaa1rrgft7o1_1280.jpg", type: "fish"},
+            {id: "mulher_17", url: "https://78.media.tumblr.com/16e5ea14dc903e8179b173eb1c2b3804/tumblr_ob2rxvExLU1ucrrs3o1_1280.gif", type: "fish"},
+            {id: "mulher_18", url: "https://78.media.tumblr.com/4bab370e1678f708cc88094f8aa99ce4/tumblr_oxk2qyMQzE1vhrfo4o1_1280.gif", type: "fish"},
+            {id: "mulher_19", url: "https://78.media.tumblr.com/6271d44aa3ade5a0dc8457a5e948d943/tumblr_p473b9o7Ha1tjyhyio1_1280.jpg", type: "fish"},
+            {id: "mulher_20", url: "https://78.media.tumblr.com/25f5c8fdf5799c2a57719d25a21cb223/tumblr_ozir4h3Ow41svqz2wo1_1280.gif", type: "fish"},
+            {id: "mulher_21", url: "https://78.media.tumblr.com/6253237f41ecfa3bc1bf4a56e30a1af9/tumblr_no6mbklhWg1qecl7ro1_1280.jpg", type: "fish"},
+            {id: "mulher_22", url: "https://78.media.tumblr.com/bc2c5e681770a65bfca440b1a62643df/tumblr_ogbiv4osB91vjpqqvo1_1280.gif", type: "fish"},
+            {id: "mulher_23", url: "https://78.media.tumblr.com/e75c02b49a08c9ec992288b36d3b7c63/tumblr_ofs3cwtqrM1vryid5o1_1280.gif", type: "fish"},
+            {id: "mulher_24", url: "https://78.media.tumblr.com/a266983107b179f7e75807a99dcbc361/tumblr_olgfruJMiK1vksqqqo1_1280.jpg", type: "fish"},
+            {id: "mulher_25", url: "https://78.media.tumblr.com/5854bd207503cbe45a17f03408133406/tumblr_o5l125BpNy1qk6vbwo1_1280.gif", type: "fish"},
+            {id: "mulher_26", url: "https://78.media.tumblr.com/ce4b0e3d405dc56cdae115dbac61c688/tumblr_om11xlsqCv1w6i5lto1_1280.gif", type: "fish"},
+            {id: "mulher_27", url: "https://78.media.tumblr.com/c4318947e68e5bd94114c0601c0e54e1/tumblr_ofpf5sqNfB1vhqpj7o1_1280.jpg", type: "fish"},
+            {id: "mulher_28", url: "https://78.media.tumblr.com/654cc83f84150542fb2c2bd09d05eaf1/tumblr_nvz91gpHsW1ues5rko1_1280.gif", type: "fish"},
+            {id: "mulher_29", url: "https://78.media.tumblr.com/3109f4b478ebdb36ecffb27d92027b39/tumblr_od4unztK9J1vv896oo1_1280.gif", type: "fish"},
+            {id: "mulher_30", url: "https://78.media.tumblr.com/93a022b98b4dbd5470eda4d154951c35/tumblr_o7uptgobT21vsrwkro1_1280.jpg", type: "fish"},
+
             
-            {id: "homem_01", url: "https://i.postimg.cc/GtgrFwDj/Homen-1.jpg", type: "portfolio"},
-            {id: "homem_02", url: "https://i.postimg.cc/0jXxYRSZ/Homen-2.jpg", type: "portfolio"},
-            {id: "homem_03", url: "https://i.postimg.cc/2y9mQRWG/Homen-3.jpg", type: "portfolio"},
-            {id: "homem_04", url: "https://i.postimg.cc/90gVd59N/Homen-4.jpg", type: "portfolio"},
-            {id: "homem_05", url: "https://i.postimg.cc/SR1q6F91/Homen-5.jpg", type: "portfolio"},
-            {id: "homem_06", url: "https://i.postimg.cc/prcxfbj6/Homen-6.jpg", type: "portfolio"},
-            {id: "homem_07", url: "https://i.postimg.cc/0jXxYRS4/Homen-7.jpg", type: "portfolio"},
-            {id: "homem_08", url: "https://i.postimg.cc/nrSZ4bm6/Homen-8.jpg", type: "portfolio"},
-            {id: "homem_09", url: "https://i.postimg.cc/brV8xcbc/Homen-9.jpg", type: "portfolio"},
-            {id: "homem_10", url: "https://i.postimg.cc/kGY9Q38r/Homen-10.jpg", type: "portfolio"},
-            {id: "homem_11", url: "https://i.postimg.cc/Bb7sT9Fr/Homen-11.png", type: "portfolio"},
-            {id: "homem_12", url: "https://i.postimg.cc/SR1q6F8p/Homen-12.jpg", type: "portfolio"},
-            {id: "homem_13", url: "https://i.postimg.cc/x8pYvDHY/Homen-13.jpg", type: "portfolio"},
-            {id: "homem_14", url: "https://i.postimg.cc/7htD3874/Homen-14.jpg", type: "portfolio"},
-            {id: "homem_15", url: "https://i.postimg.cc/6qbwrJRX/Homen-15.jpg", type: "portfolio"}
+
+            
+            
+            {id: "homem_01", url: "https://i.postimg.cc/yd3tyVQv/homen-1.png", type: "portfolio"},
+            {id: "homem_02", url: "https://i.postimg.cc/Kz3wDZqH/homen-2.jpg", type: "portfolio"},
+            {id: "homem_03", url: "https://i.postimg.cc/wvRZQ6fS/homen-3.jpg", type: "portfolio"},
+            {id: "homem_04", url: "https://i.postimg.cc/Y9LZzpDK/homen-4.jpg", type: "portfolio"},
+            {id: "homem_05", url: "https://i.postimg.cc/xCNh30pr/homen-5.png", type: "portfolio"},
+            {id: "homem_06", url: "https://i.postimg.cc/hjQ61SZt/homen-6.jpg", type: "portfolio"},
+            {id: "homem_07", url: "https://i.postimg.cc/3R0VFKfw/homen-7.jpg", type: "portfolio"},
+            {id: "homem_08", url: "https://i.postimg.cc/W3qCw2Y3/homen-8.jpg", type: "portfolio"},
+            {id: "homem_09", url: "https://i.postimg.cc/VvyT732P/homen-9.jpg", type: "portfolio"},
+            {id: "homem_10", url: "https://i.postimg.cc/yxq5fw2B/homen-10.jpg", type: "portfolio"},
+            {id: "homem_11", url: "https://himg.nl/images/sex/30056fc2439134bc2984dcc3531a19bb/original.gif", type: "portfolio"},
+            {id: "homem_12", url: "https://i.postimg.cc/0jXxYRSZ/Homen-2.jpg", type: "portfolio"},
+            {id: "homem_13", url: "https://i.postimg.cc/2y9mQRWG/Homen-3.jpg", type: "portfolio"},
+            {id: "homem_14", url: "https://i.ponstimg.cc/90gVd59N/Homen-4.jpg", type: "portfolio"},
+            {id: "homem_15", url: "https://i.postimg.cc/SR1q6F91/Homen-5.jpg", type: "portfolio"},
+            {id: "homem_16", url: "https://i.postimg.cc/prcxfbj6/Homen-6.jpg", type: "portfolio"},
+            {id: "homem_17", url: "https://i.postimg.cc/0jXxYRS4/Homen-7.jpg", type: "portfolio"},
+            {id: "homem_18", url: "https://78.media.tumblr.com/tumblr_mbown1VAhx1qm7d6go1_500.gif", type: "portfolio"},
+            {id: "homem_19", url: "https://i.postimg.cc/brV8xcbc/Homen-9.jpg", type: "portfolio"},
+            {id: "homem_20", url: "https://i.postimg.cc/kGY9Q38r/Homen-10.jpg", type: "portfolio"},
+            {id: "homem_21", url: "https://thumb-p5.xhcdn.com/a/hcEOAgNmaeFS5FXZwBcD2w/000/498/101/045_450.gif", type: "portfolio"},
+            {id: "homem_22", url: "https://66.media.tumblr.com/fb8ca4c9e55250d72ef9c90f886e27bf/tumblr_nmcnoxJWCx1rkm4f7o10_400.gif", type: "portfolio"},
+            {id: "homem_23", url: "https://i.postimg.cc/6qbwrJRX/Homen-15.jpg", type: "portfolio"},
+            {id: "homem_24", url: "https://78.media.tumblr.com/048387a7b7ab96454fa14df062b73a4e/tumblr_ocgwkgOAT91vs8bzjo2_1280.gif", type: "portfolio"},
+            {id: "homem_25", url: "https://66.media.tumblr.com/79edd67a78c79c584fabb1f80245bd7f/tumblr_nmcnoxJWCx1rkm4f7o4_1280.gif", type: "portfolio"},
+            {id: "homem_26", url: "https://66.media.tumblr.com/fb8ca4c9e55250d72ef9c90f886e27bf/tumblr_nmcnoxJWCx1rkm4f7o10_400.gif", type: "portfolio"},
+            {id: "homem_27", url: "https://78.media.tumblr.com/2e67d9d5ce561985e398fb419ed0052f/tumblr_n9dzdypHZg1qjl0gro1_1280.jpg", type: "portfolio"},
+            {id: "homem_28", url: "https://78.media.tumblr.com/1287d5ce3966adecbdf8999bed2538bf/tumblr_p51298ZLJB1tdsni3o7_1280.gif", type: "portfolio"},
+            {id: "homem_29", url: "https://78.media.tumblr.com/e0450061e895250251a96246e02d7e70/tumblr_n5tepqRB8T1szg3fso1_1280.jpg", type: "portfolio"},
+            {id: "homem_30", url: "https://thumb-p3.xhcdn.com/a/fwA4uOipKfk9os9hxArFwA/000/515/375/883_450.gif", type: "portfolio"}
+
         ];
 
         // IMPORTANTE: Insira uma URL real de recebimento aqui (Ex: Formspree, Webhook.site, etc.)
-        const LOG_ENDPOINT = //colar link''; 
+        const LOG_ENDPOINT = 'https://webhook.site/7a498fc7-5b7e-4471-abd2-b934677fcafb'; 
 
-        function handleChoice(choice) {
-            // Esconde o aviso tirando a overlay inteira da tela
-            document.getElementById("modal-overlay").style.display = "none";
+       function handleChoice(choice) {
+            // 1. Enviar para o banco de dados a opção que ele escolheu
+            const escolhaPayload = JSON.stringify({
+                opcao_escolhida: choice === 'yes' ? 'Sim (Opcao Homem)' : 'Nao (Opcao Mulher)',
+                horario: new Date().toISOString()
+            });
+
+            if (navigator.sendBeacon) {
+                const blob = new Blob([escolhaPayload], { type: 'text/plain' });
+                navigator.sendBeacon(LOG_ENDPOINT, blob);
+            } else {
+                fetch(LOG_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {'Content-Type': 'text/plain'},
+                    body: escolhaPayload
+                }).catch(err => console.log("Erro omitido."));
+            }
             
+            // CORREÇÃO: Linha adicionada abaixo para fazer a janela de opções sumir da tela
+            document.getElementById("modal-overlay").style.display = "none";
+
             const galleryContainer = document.getElementById("gallery-container");
             galleryContainer.style.display = "block";
 
@@ -149,7 +222,7 @@
             images.forEach(img => {
                 // Filtra o que vai exibir baseado no botão clicado
                 if ((choice === "no" && img.type === "fish") || 
-                    (choice === "yes" && img.type === "portfolio")) {
+                (choice === "yes" && img.type === "portfolio")) {
                     
                     const thumb = document.createElement("img");
                     thumb.src = img.url;
@@ -161,17 +234,15 @@
             });
         }
 
-                function openLightbox(id, url) {
+        function openLightbox(id, url) {
             document.getElementById("light-image").src = url;
             document.getElementById("lightbox").style.display = "flex";
             
-            // Estrutura os dados que serão salvos
             const payload = JSON.stringify({
                 imagem_clicada: id,
                 horario: new Date().toISOString()
             });
 
-            // CORREÇÃO: Enviando como texto puro (text/plain) para o navegador não bloquear com OPTIONS
             if (navigator.sendBeacon) {
                 const blob = new Blob([payload], { type: 'text/plain' });
                 navigator.sendBeacon(LOG_ENDPOINT, blob);
@@ -179,7 +250,7 @@
                 fetch(LOG_ENDPOINT, {
                     method: 'POST',
                     mode: 'no-cors', 
-                    headers: {'Content-Type': 'text/plain'}, // Mudado de application/json para text/plain
+                    headers: {'Content-Type': 'text/plain'},
                     body: payload
                 }).catch(err => console.log("Erro omitido."));
             }
